@@ -1,11 +1,14 @@
-var email = {{$user->email}}
+var email = "georgies@rminno.com";
 var dataObject = {
 
     data: [],
+    email : email,
+    base : 'apps.rminno.com/api/bucket?where={"email": "georgies@rminno.com"}&isVendobucketrWebsite=true',
+    param : {"email":this.email , "isVendorbucketWebsite":true},
     //make the email dynamic
     init: function(email)
     {
-        $.get('apps.rminno.com/api/bucket?where={"email": ""}&isVendobucketrWebsite=true' , function(data){
+        $.get(this.base , function(data){
             this.data['bucket_data'] = data;
         });
     },
@@ -26,9 +29,7 @@ var dataObject = {
         console.log(this.data);
     }
 };
-
-window.addEventListener('onload' , dataObject.init());
-console.log(dataObject.data);
+dataObject.init();
 
 //Data set from api resource /bucket? for username
 /*
