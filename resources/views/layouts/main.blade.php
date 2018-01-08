@@ -60,6 +60,20 @@
             left: 300%;
             background: deeppink;
         }
+        #config2 {
+            left: 400%;
+            background: white;
+        }
+
+        #config3 {
+            left: 500%;
+            background: #1f648b;
+        }
+
+        #config4 {
+            left: 600%;
+            background: darkviolet;
+        }
 
         ul {
             position: fixed;
@@ -82,15 +96,30 @@
             transform: translateX(-290%);
         }
 
+        #next2:target .page#config2{
+            transform: translate(-390%);
+        }
+        #next3:target .page#config3{
+            transform: translate(-490%);
+        }
+        #next4:target .page#config4{
+            transform: translate(-590%);
+        }
+
+
         #t2:target .page#p1,
         #t3:target .page#p1,
-        #t4:target .page#p1 {
+        #t4:target .page#p1,
+        #next2:target .page#p1{.
+
+
             background: black;
         }
 
         #t2:target .page#p1 .icon,
         #t3:target .page#p1 .icon,
-        #t4:target .page#p1 .icon {
+        #t4:target .page#p1 .icon,
+        #next2:target .page#p1 .icon{
             -webkit-filter: blur(3px);
             filter: blur(3px);
         }
@@ -111,7 +140,8 @@
 
         #t2:target ul .icon,
         #t3:target ul .icon,
-        #t4:target ul .icon {
+        #t4:target ul .icon,
+        #next2:target ul .icon{
             transform: scale(.6);
             transition-delay: .25s;
         }
@@ -206,6 +236,11 @@
         }
 
         #t4:target .page#p4 .icon {
+            transform: translateX(0) !important;
+            transition-delay: 1s;
+        }
+
+        #next2:target .page#config2 .icon{
             transform: translateX(0) !important;
             transition-delay: 1s;
         }
@@ -335,6 +370,19 @@
             height: 185px;
         }
 
+        .form-configuration{
+            border: 1px solid #2a88bd;
+            background-color: #fff;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            border-radius: 10px;
+            padding: 5px;
+        }
+
+        .form-configuration label{
+            color: #1b2426;
+        }
+
     </style>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -365,6 +413,9 @@
                     </div>
                     <div class="page" id="p2">
                         @yield('configuration')
+                    </div>
+                    <div class="page" id="config2">
+                        @yield('configuration2')
                     </div>
                     <div class="page" id="p3">
                         @yield('status')
