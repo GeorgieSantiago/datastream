@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Auth as Auth;
+use App\Configure as Config;
 
 class PackageController extends Controller
 {
@@ -37,12 +38,17 @@ class PackageController extends Controller
         $username = $this->username = $_POST['db_user'];
         $password = $this->password = $_POST['db_pass'];
         $database = $this->database = $_POST['db_base'];
-
-        $this->limit = env('limit');
+        /*new model*/
+        if($config = new Config){
+            $config = new Config;
+        } else {
+            $config = NULL;
+        }
+        $this->limit = env($config['limit'] ,'limit');
         $this->url = env('url');
         $this->port = env('port');
         $this->token = env('token');
-        $this->_bucket = env('bucket');
+        $this->_bucket = env($config['bucket'] , 'bucket');
         $this->_classes = $this->_getClasses();
         $this->debug = $debug;
 
