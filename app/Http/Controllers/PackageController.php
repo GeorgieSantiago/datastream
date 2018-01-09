@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Auth as Auth;
 
 class PackageController extends Controller
 {
@@ -24,23 +25,26 @@ class PackageController extends Controller
     public $database;
     public $debug;
 
-    public function __construct($config)
+    public function __construct($config , $debug)
     {
 
-        // set configs to class
-        $servername = $this->servername = $config['MYSQL']['servername'];
-        $username = $this->username = $config['MYSQL']['username'];
-        $password = $this->password = $config['MYSQL']['password'];
-        $database = $this->database = $config['MYSQL']['database'];
+	    // set configs to class
+	    /*
+	     * For security reasons This constructor does not store
+	     * database information
+	     * */
+        $servername = $this->servername = $_POST['db_host'];
+        $username = $this->username = $_POST['db_user'];
+        $password = $this->password = $_POST['db_pass'];
+        $database = $this->database = $_POST['db_base'];
 
-        $this->limit = $config['API']['limit'];
-        $this->url = $config['API']['url'];
-        $this->port = $config['API']['port'];
-        $this->token = $config['API']['token'];
-        $this->_bucket = $config['API']['bucket'];
+        $this->limit = env('limit');
+        $this->url = env('url');
+        $this->port = env('port');
+        $this->token = env('token');
+        $this->_bucket = env('bucket');
         $this->_classes = $this->_getClasses();
-        $this->debug = (bool)$config['API']['debug'];
-
+        $this->debug = $debug;
 
         try {
             // connect to PDO

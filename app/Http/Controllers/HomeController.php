@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth as Auth;
-use App\Http\Controllers\PackageController as ;
+use App\Http\Controllers\PackageController as Package;
 
 
 class HomeController extends Controller
@@ -26,17 +26,49 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $buckets = $this->getBucketList(Auth::user()->email);
-        return view('home', compact('user' , 'buckets'));
+        $user = Auth::user();
+        // $buckets = $this->getBucketList(Auth::user()->email);
+        return view('home', compact('user', 'buckets'));
     }
 
     private function getBucketList($email)
     {
-        $url = 'apps.rminno.com/api/bucket?where=';
-        $params = '{"email": "' . $email .'"}';
-        $auth = '&isVendobucketrWebsite=true';
-        $myBuckets = $url . $params . $auth;
-        $bucketData = file_get_contents($myBuckets);
-        dd($bucketData);
+        dd($email);
+    }
+
+    public function createTables(Request $request)
+    {
+        new Package($request, true);
+    }
+
+    /**
+     * @param Request $request
+     * @return Request
+     *
+     * Store configuration settings for executing the build
+     */
+    public function store(Request $request)
+    {
+        return $request;
+    }
+
+    /*
+     * @params Request $data
+     * @returns Results (bool)
+     * Update configuration settings for executing the build
+     * */
+    public function update(Request $data)
+    {
+
+    }
+
+    /*
+     * @param User::id $id
+     * @returns bool
+     * Destroy configuration settings for executing the build
+     * */
+    public function destroy($id)
+    {
+
     }
 }
