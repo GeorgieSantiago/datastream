@@ -382,6 +382,9 @@
         .form-configuration label{
             color: #1b2426;
         }
+        form{
+            min-height: 384px !important;
+        }
 
     </style>
     <!-- Latest compiled and minified CSS -->

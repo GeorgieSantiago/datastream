@@ -121,7 +121,9 @@
         </div>-->
         <div class="row">
             <div class="col-md-4">
-                <form class="form-configuration " method="POST" action="#">
+                <form class="form-configuration " method="POST" action="{{route('init')}}">
+                    <h4>Configure and Run</h4>
+                    {{csrf_field()}}
                     <div class="form-group">
                         <label>Choos a Database</label>
                         <select class="form-control" name="database">
@@ -142,12 +144,33 @@
                         <label>Database Password</label><br>
                         <input type="password" value="" name="db_username" class="form-control">
                     </div>
-                    <input type="submit" class="btn btn-primary" value="Update">
+                    <input type="hidden" value="honeypot">
+                    <input type="submit" class="btn btn-primary" value="Run">
                 </form>
             </div>
             <div class="col-md-4">
-                <form class="form-configuration" method="POST" action="#">
-                <h3>Bucket List</h3>
+                <form class="form-configuration" method="POST" action="{{route('configure.store')}}">
+                    <h4 style="color: black;">Bucket List</h4>
+                    {{csrf_field()}}
+                    <div class="form-group">
+                        <label>Limit</label><br>
+                        <input type="number" value="" name="limit" class="form-control">
+                    </div>
+                    <!--Dynamically fill this from the API-->
+                    <div class="form-group">
+                        <label>Authorization Token</label><br>
+                        <input type="text" value="" name="auth_token" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Bucket ID</label><br>
+                        @if(isset($bucketId))
+                            <input type="text" value="" name="bucket_id" class="form-control">
+                        @else
+                            <input type="text" value="" name="bucket_id" class="form-control">
+                        @endif
+                    </div>
+                    <input type="hidden" value="honeypot">
+                    <input type="submit" class="btn btn-primary" value="Update">
                 </form>
             </div>
         </div>
