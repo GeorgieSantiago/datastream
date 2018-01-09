@@ -378,3 +378,15 @@ form{
 .panel-body .panel-list{
 
 }
+
+.panel-table{
+  background-color: #374046 !important;
+}
+
+.btn-spacing{
+  margin-right: -70px;
+}
+
+h4{
+  color: black !important;
+}

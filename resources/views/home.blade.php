@@ -62,84 +62,6 @@
 
 @section('configuration')
     <div class="container">
-    <!--<div class="corner">
-            <div class="row form-group product-chooser">
-                <h1>Choose a Database</h1>
-                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                    <div onclick="dataObject.setDatabase('mysql')"
-                         style="background-image: url({{asset('img/mysql-image.png')}});"
-                         class="offer offer-success offer-image">
-                        <div class="shape">
-                            <div class="shape-text">
-                                MySQL
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                    <div onclick="dataObject.setDatabase('mongo')"
-                         style="background-image: url({{asset('img/mongodb.png')}});"
-                         class="offer offer-success offer-image">
-                        <div class="shape">
-                            <div class="shape-text">
-                                MongoDB
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                    <div onclick="dataObject.setDatabase('oracle')"
-                         style="background-image: url({{asset('img/oracle.png')}});"
-                         class="offer offer-success offer-image">
-                        <div class="shape">
-                            <div class="shape-text">
-                                Oracle
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row form-group product-chooser">
-                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                    <div onclick="dataObject.setDatabase('access')"
-                         style="background-image: url({{asset('img/access.png')}});"
-                         class="offer offer-success offer-image">
-                        <div class="shape">
-                            <div class="shape-text">
-                                Access
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                    <div onclick="dataObject.setDatabase('maria')"
-                         style="background-image: url({{asset('img/mariadb.png')}});"
-                         class="offer offer-success offer-image">
-                        <div class="shape">
-                            <div class="shape-text">
-                                MariaDB
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                    <div onclick="dataObject.setDatabase('postgres')"
-                         style="background-image: url({{asset('img/postgres.png')}});"
-                         class="offer offer-success offer-image">
-                        <div class="shape">
-                            <div class="shape-text">
-                                Postgres
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <a class="btn btn-primary" href="#next2">Next<i class="fa glyphicon-fast-forward"></i></a>
-        </div>-->
         <div class="row">
             <div class="col-md-4">
                 <form class="form-configuration " method="POST" action="{{route('configure.store')}}">
@@ -194,6 +116,65 @@
                     <input type="submit" class="btn btn-primary" value="Update">
                 </form>
             </div>
+            <div class="col-md-4">
+                <form class="form-configuration" method="POST" action="{{route('configure.store')}}">
+                    <h4 style="color: black;">Bucket List</h4>
+                    {{csrf_field()}}
+                    <div class="form-group">
+                        <label>Limit</label><br>
+                        <input type="number" value="" name="limit" class="form-control">
+                    </div>
+                    <!--Dynamically fill this from the API-->
+                    <div class="form-group">
+                        <label>Authorization Token</label><br>
+                        <input type="text" value="" name="auth_token" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Bucket ID</label><br>
+                        @if(isset($bucketId))
+                            <input type="text" value="" name="bucket" class="form-control">
+                        @else
+                            <input type="text" value="" name="bucket" class="form-control">
+                        @endif
+                    </div>
+                    <input type="hidden" value="honeypot">
+                    <input type="submit" class="btn btn-primary" value="Update">
+                </form>
+            </div>
+        </div>
+        <div class="row">
+          <table class="panel-table table table-bordered bg-default">
+            <h4 style="color: white !important;">Preset Configurations</h4>
+            <tr>
+              <th>Name</th>
+              <th>Created By</th>
+              <th>Description</th>
+              <th>Created At</th>
+              <th>Updated At</th>
+              <th>Actions</th>
+            </tr>
+            @if(isset($presets))
+              @foreach($presets as $preset)
+                <tr>
+                  <td class="table-item" >{{$preset['name']}}</td>
+                  <td class="table-item" >{{$preset['created_by']}}</td>
+                  <td class="table-item" >{{$preset['description']}}</td>
+                  <td class="table-item" >{{$preset['created_at']}}</td>
+                  <td class="table-item" >{{$preset['updated_at']}}</td>
+                  <td class="table-item"><a href="#" class="btn  btn-info">Activate</a> <a href="#" class="btn-spacing btn btn-danger">Delete</a></td>
+                </tr>
+              @endforeach
+            @else
+            <tr>
+              <td class="table-item" >No Data</td>
+              <td class="table-item" >No Data</td>
+              <td class="table-item" >No Data</td>
+              <td class="table-item" >No Data</td>
+              <td class="table-item" >No Data</td>
+              <td class="table-item"><a href="#" class="btn  btn-info">Activate</a> <a href="#" class="btn-spacing btn btn-danger">Delete</a></td>
+            </tr>
+            @endif
+          </table>
         </div>
 
 
