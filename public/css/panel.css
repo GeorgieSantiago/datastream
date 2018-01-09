@@ -362,3 +362,19 @@ form{
     min-height: 384px !important;
 }
 
+.panel-text{
+  color: black !important;
+}
+
+.panel-text .panel{
+  min-height: 200px;
+  border-radius: 20px;
+}
+
+.panel-body p{
+  padding: 5px;
+}
+
+.panel-body .panel-list{
+
+}

@@ -9,28 +9,49 @@
                 {{ session('status') }}
             </div>
         @endif
-        <div class="row">
+        <div class="row panel-text">
             <div class="col-sm-4">
                 <div class="panel panel-pink">
-                    <div class="panel-heading">Panel Pink</div>
-                    <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam porta
-                        varius enim, ut lacinia nisl bibendum ut. Donec viverra sodales.
+                    <div class="panel-heading"><h4>Deployment Status: </h4></div>
+                    <div class="panel-body">
+                      @if(isset($deployment))
+                        <p class="bg-primary">Table Deployed</p>
+                      @else
+                      <p class="bg-danger">No Deployment</p>
+                      @endif
                     </div>
                 </div>
             </div>
             <div class="col-sm-4">
                 <div class="panel panel-blue">
-                    <div class="panel-heading">Panel Blue</div>
-                    <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam porta
-                        varius enim, ut lacinia nisl bibendum ut. Donec viverra sodales.
+                    <div class="panel-heading"><h4>Vendor List: </h4></div>
+                    <div class="panel-body">
+                      @if(isset($vendorList))
+                      <ul class="panel-list">
+                        @foreach($vendorList as $vendor)
+                          <li>{{$vendor->name}}</li>
+                          @endforeach
+                      </ul>
+                    @else
+                    <p class="bg-danger">No Vendor Data. Please contact RMInnovations to have your data synced!</p>
+                      @endif
                     </div>
                 </div>
             </div>
             <div class="col-sm-4">
                 <div class="panel panel-yellow">
-                    <div class="panel-heading">Panel Green</div>
-                    <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam porta
-                        varius enim, ut lacinia nisl bibendum ut. Donec viverra sodales.
+                    <div class="panel-heading"><h4>Products: </h4></div>
+                    <div class="panel-body">
+                      @if(isset($simpleProductList))
+                      <p class="bg-primary">Simple Products <span class="pull-right">{{$simpleProductList->count}}</span></p>
+                      @else
+                      <p class="bg-primary">Configurable Products: <span class="pull-right">0</span></p>
+                      @endif
+                      @if(isset($configProductList))
+                      <p class="bg-primary">Simple Products <span class="pull-right">{{$configProductList->count}}</span></p>
+                      @else
+                      <p class="bg-primary">Simple Products: <span class="pull-right">0</span></p>
+                      @endif
                     </div>
                 </div>
             </div>
@@ -121,7 +142,7 @@
         </div>-->
         <div class="row">
             <div class="col-md-4">
-                <form class="form-configuration " method="POST" action="{{route('init')}}">
+                <form class="form-configuration " method="POST" action="{{route('configure.store')}}">
                     <h4>Configure and Run</h4>
                     {{csrf_field()}}
                     <div class="form-group">
@@ -164,9 +185,9 @@
                     <div class="form-group">
                         <label>Bucket ID</label><br>
                         @if(isset($bucketId))
-                            <input type="text" value="" name="bucket_id" class="form-control">
+                            <input type="text" value="" name="bucket" class="form-control">
                         @else
-                            <input type="text" value="" name="bucket_id" class="form-control">
+                            <input type="text" value="" name="bucket" class="form-control">
                         @endif
                     </div>
                     <input type="hidden" value="honeypot">
